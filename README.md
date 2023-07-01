@@ -1,8 +1,10 @@
 # Breast_Cancer_Classification
+
   Dataset - Breast Cancer
   ML - Supervised learning (Classification)
   
   1. **import the packages/libraries**
+
     import pandas as pd
     import numpy as np
     import seaborn as sns
@@ -20,7 +22,8 @@
     from sklearn.metrics import accuracy_score, roc_auc_score,f1_score
     from mlxtend.plotting import plot_decision_regions
      
-  2. **Load data**
+  3. **Load data**
+     
     temp=pd.read_csv("/content/drive/MyDrive/dataset/cancer.csv")  #load dataset
     df=temp.copy()  #copy of dataset
     pd.set_option('display.max_columns', None) #display all values
@@ -28,44 +31,61 @@
     print(df.shape)  #shape of dataset
     (569, 33)
    
-  3. **Checking Dataset (Balanced or Imbalanced)**
+  5. **Checking Dataset (Balanced or Imbalanced)**
+     
     val_cnt=df['diagnosis'].value_counts()
     print("values count: ")
     print(val_cnt)
     print("% of B: ",val_cnt["B"]/len(df['diagnosis'])*100)
     print("% of M: ",val_cnt["M"]/len(df['diagnosis'])*100)
+
 ![cancer1](https://github.com/Priyadharshika19/Breast_Cancer_Classification/assets/129640468/ad0805f1-528d-420d-b91f-7e4b2b1d7bbb)
+
 
     Here dataset is balanced.
     if class B or class M > 70%  then It is umbalanced and the model will be biased 
   
   4. **Relationship between features**
+     
     import seaborn as sns
     plt.figure(figsize=(30,30))
     sns.heatmap(df.corr(),annot=True,fmt=".0%")
     plt.show()
- ![c3](https://github.com/Priyadharshika19/Breast_Cancer_Classification/assets/129640468/1fbf4288-ca6f-4094-bd4d-3190712ea4a2)    
 
-  5. **Feature Engineering**
+ ![c3](https://github.com/Priyadharshika19/Breast_Cancer_Classification/assets/129640468/1fbf4288-ca6f-4094-bd4d-3190712ea4a2)
+
+
+  6. **Feature Engineering**
+     
     1. missing or null values
         sns.heatmap(df.isna())
         df.isna().sum()
+     
 ![c2](https://github.com/Priyadharshika19/Breast_Cancer_Classification/assets/129640468/4d9b9a20-de44-4857-b73f-ca51907be2ad)![c2 jpg](https://github.com/Priyadharshika19/Breast_Cancer_Classification/assets/129640468/cb538fea-94b1-46f2-a0c6-4d43c3f17550)
-        All values in Unknown 32 are Null values so drop column Unknown 32
 
+        All values in Unknown 32 are Null values so drop column Unknown 32
         df.dropna(axis=1,inplace=True)
+     
     2. unrequired features
+    
         del df["id"]   
+        
     3. Duplicates
+    
         df.duplicated().sum()
         In this dataset, there is no duplicates.
         if there is any, drop duplicates
+     
     4. Incorrect format
+    
         df.info()
+        
 ![c4](https://github.com/Priyadharshika19/Breast_Cancer_Classification/assets/129640468/b0757ed3-f1fb-4fe6-84e8-fb565afc4c03)
+
         There is no incorrect format
 
     5. Outliers
+    
       1.Create DataFrame with column names, minimum value,lower threshold value, maximum value, maximum threshold value
 
         df.describe()
@@ -88,6 +108,7 @@
         outliers_df=pd.DataFrame(outliers_dict)
         #df["area_worst"].max()
         outliers_df
+        
 ![c5](https://github.com/Priyadharshika19/Breast_Cancer_Classification/assets/129640468/b021e7d7-78ac-4b75-b547-a90fc8e2188b)
 
         a=df["area_worst"]
@@ -98,6 +119,7 @@
             count=count+1
         print("outliers count: ",count)
         print("outliers : ",round(count/len(df["area_worst"])*100),"%") 
+        
   ![c6](https://github.com/Priyadharshika19/Breast_Cancer_Classification/assets/129640468/92094fd1-b997-4c1e-b278-8e4600834d89)
 
       2.Replace outliers with lower and upper threshold values 
@@ -117,10 +139,13 @@
         array([1, 0])
 
   7. **EDA**
+     
     sns.pairplot(df, hue="diagnosis")
     Sample graph:
+    
 ![c9](https://github.com/Priyadharshika19/Breast_Cancer_Classification/assets/129640468/37e9b0d0-3daf-4eaf-b6b2-5d9649c7459c)
-  8. **Split data into Train and Test**
+
+  9. **Split data into Train and Test**
 
     Splitting data in ratio 80:20
 
@@ -130,14 +155,17 @@
       len(X_train),len(X_test)
 
             (455, 114)
+            
   9. **Scale data**
+
     scaling is not mandatory for all models
 
       scaler=StandardScaler()
       scaler.fit(X_train,y_train)
       scaled_x_train=scaler.transform(X_train)
       scaled_x_test=scaler.transform(X_test)
-  10. Model fitting, predicting target and finding accuracy_score
+      
+  11. **Model fitting, predicting target and finding accuracy_score**
     LogisticRegression       
     KNN       
     Decision_tree       
@@ -146,7 +174,6 @@
     XGBoost            
     GaussianNB       
 
-          
     def clf(df,clf):
 
       X=df.loc[:,df.columns[1:]].values
