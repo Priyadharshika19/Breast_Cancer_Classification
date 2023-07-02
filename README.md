@@ -22,7 +22,7 @@
     from sklearn.metrics import accuracy_score, roc_auc_score,f1_score
     from mlxtend.plotting import plot_decision_regions
      
-  3. **Load data**
+  2. **Load data**
      
     temp=pd.read_csv("/content/drive/MyDrive/dataset/cancer.csv")  #load dataset
     df=temp.copy()  #copy of dataset
@@ -31,7 +31,7 @@
     print(df.shape)  #shape of dataset
     (569, 33)
    
-  5. **Checking Dataset (Balanced or Imbalanced)**
+  3. **Checking Dataset (Balanced or Imbalanced)**
      
     val_cnt=df['diagnosis'].value_counts()
     print("values count: ")
@@ -55,7 +55,7 @@
  ![c3](https://github.com/Priyadharshika19/Breast_Cancer_Classification/assets/129640468/1fbf4288-ca6f-4094-bd4d-3190712ea4a2)
 
 
-  6. **Feature Engineering**
+  5. **Feature Engineering**
      
     1. missing or null values
         sns.heatmap(df.isna())
