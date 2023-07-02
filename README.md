@@ -376,17 +376,18 @@
 
 11.**Feature Importance**
 
-   rf = RandomForestClassifier(n_estimators = 100, max_depth=3, criterion = 'entropy', random_state = 0)
-   rf.fit(scaled_x_train, y_train)
-   importance=rf.feature_importances_
-   type(importance)
-   #print(list(zip(importance,df.columns)))
-   dict2={"importance":importance,"features":df.columns}
-   importance_feature=pd.DataFrame.from_dict(dict2, orient='index')
-   importance_feature = importance_feature.transpose()
-   importance_feature[importance_feature["importance"]>0]
+    rf = RandomForestClassifier(n_estimators = 100, max_depth=3, criterion = 'entropy', random_state = 0)
+    rf.fit(scaled_x_train, y_train)
+    importance=rf.feature_importances_
+    type(importance)
+    #print(list(zip(importance,df.columns)))
+    dict2={"importance":importance,"features":df.columns}
+    importance_feature=pd.DataFrame.from_dict(dict2, orient='index')
+    importance_feature = importance_feature.transpose()
+    importance_feature[importance_feature["importance"]>0]
 
-![c11](https://github.com/Priyadharshika19/Breast_Cancer_Classification/assets/129640468/7fe3a6d3-fba8-4e6d-b519-1c0575d46740)
+![c13](https://github.com/Priyadharshika19/Breast_Cancer_Classification/assets/129640468/c9a3bf3e-5420-48d2-888c-7537052c3fec)
+
 
 **Conclusion**
 
