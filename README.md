@@ -57,7 +57,7 @@
 
   5. **Feature Engineering**
      
-    1. **missing or null values**
+    1. missing or null values
         sns.heatmap(df.isna())
         df.isna().sum()
      
@@ -66,17 +66,17 @@
         All values in Unknown 32 are Null values so drop column Unknown 32
         df.dropna(axis=1,inplace=True)
      
-    2. **unrequired features**
+    2. unrequired features
     
         del df["id"]   
         
-    3. **Duplicates**
+    3. Duplicates
     
         df.duplicated().sum()
         In this dataset, there is no duplicates.
         if there is any, drop duplicates
      
-    4. **Incorrect format**
+    4. Incorrect format
     
         df.info()
         
@@ -84,7 +84,7 @@
 
         There is no incorrect format
 
-    5. **Outliers**
+    5. Outliers
     
       1.Create DataFrame with column names, minimum value,lower threshold value, maximum value, maximum threshold value
 
@@ -147,7 +147,7 @@
 
   9. **Split data into Train and Test**
 
-    **Splitting data in ratio 80:20**
+    Splitting data in ratio 80:20
 
       X=df.loc[:,df.columns[1:]].values
       y=df.loc[:,"diagnosis"].values
@@ -158,7 +158,7 @@
             
   9. **Scale data**
 
-    **scaling is not mandatory for all models**
+    scaling is not mandatory for all models
 
       scaler=StandardScaler()
       scaler.fit(X_train,y_train)
